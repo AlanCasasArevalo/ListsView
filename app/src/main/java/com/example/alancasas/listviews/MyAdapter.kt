@@ -1,38 +1,38 @@
 package com.example.alancasas.listviews
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-public class MyAdapter(val context: Context, val layout: Int, val names: List<String>) : BaseAdapter(){
+class MyAdapter(val context: Context, val layout: Int, val names: List<String>) : BaseAdapter(){
 
-    override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View? {
 
-        var customView: View?
+        var viewHolder : ViewHolder
+        var customView : View?
 
-        //Copiamos vista
-        customView = convertView
+        if (convertView == null){
 
-        //Creamos un inflador lista con el contexto
-        val layoutInflater = LayoutInflater.from(context)
+            var layoutInflater = LayoutInflater.from(context)
+            customView = layoutInflater.inflate(R.layout.list_item, null)
+            viewHolder = ViewHolder()
+            viewHolder.nameTextView = customView.findViewById(R.id.custom_text)
+            customView.tag = viewHolder
 
-        //Iflamos la vista creada
-        customView =  layoutInflater.inflate(R.layout.list_item, null)
+        }else {
+            customView = convertView
+            viewHolder = customView.tag as ViewHolder
+        }
 
         //Obtenemos del array el nombre que toque
         var currentName = names[position]
 
-        //Obtenemos el textview del layout
-        var textView  : TextView = customView.findViewById(R.id.text)
 
-        //asignamos el nombre a la vista
-        textView.text = currentName
+        viewHolder.nameTextView.text = currentName
 
-        //Devolveos la vista
         return customView
     }
 
@@ -42,4 +42,24 @@ public class MyAdapter(val context: Context, val layout: Int, val names: List<St
 
     override fun getCount(): Int = names.size
 
+    class ViewHolder  {
+        lateinit var nameTextView: TextView
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

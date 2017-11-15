@@ -3,6 +3,7 @@ package com.example.alancasas.listviews.Activities
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -32,10 +33,6 @@ class ListActivity : AppCompatActivity() {
         names.add("Rodrigo")
         names.add("Lusi")
         names.add("Ej")
-
-        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names)
-
-        listView?.adapter = adapter
 
         listView?.setOnItemClickListener { adapterView, view, position, id ->
             Toast.makeText(this, "Clicked " + names.get(position), Toast.LENGTH_LONG).show()
