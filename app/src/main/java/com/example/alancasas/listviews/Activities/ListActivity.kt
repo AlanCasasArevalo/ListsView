@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.example.alancasas.listviews.R
 
 class ListActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class ListActivity : AppCompatActivity() {
 
         listView = findViewById(R.id.list_view)
 
-        var names = arrayListOf<String>(
+        var names = arrayListOf<String> (
                 "Alan",
                 "Bibi",
                 "Vega",
@@ -29,23 +30,16 @@ class ListActivity : AppCompatActivity() {
         names.add("Manuel")
         names.add("Jesus")
         names.add("Rodrigo")
-        names.add("Felipe")
-        names.add("Prdro")
-        names.add("Samuel")
-        names.add("Erika")
-        names.add("Julian")
-        names.add("Epistoles")
-        names.add("Ignacio")
-        names.add("Ruben")
         names.add("Lusi")
         names.add("Ej")
-
-
-
 
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names)
 
         listView?.adapter = adapter
+
+        listView?.setOnItemClickListener { adapterView, view, position, id ->
+            Toast.makeText(this, "Clicked " + names.get(position), Toast.LENGTH_LONG).show()
+        }
 
     }
 }
