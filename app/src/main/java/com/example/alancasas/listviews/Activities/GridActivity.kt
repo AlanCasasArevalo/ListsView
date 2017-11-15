@@ -1,24 +1,21 @@
 package com.example.alancasas.listviews.Activities
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.support.v7.app.AppCompatActivity
+import android.widget.GridView
+import android.widget.Toast
 import com.example.alancasas.listviews.MyAdapter
 import com.example.alancasas.listviews.R
 
-class ListActivity : AppCompatActivity() {
-
-    private var listView : ListView? = null
+class GridActivity : AppCompatActivity() {
+        private var gridView: GridView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list)
+        setContentView(R.layout.activity_grid)
 
-        listView = findViewById(R.id.list_view)
+
+        gridView = findViewById(R.id.grid_view)
 
         var names = arrayListOf<String> (
                 "Alan",
@@ -34,57 +31,16 @@ class ListActivity : AppCompatActivity() {
         names.add("Lusi")
         names.add("Ej")
 
-        listView?.setOnItemClickListener { adapterView, view, position, id ->
+        gridView?.setOnItemClickListener { adapterView, view, position, id ->
             Toast.makeText(this, "Clicked " + names[position], Toast.LENGTH_LONG).show()
         }
 
-        var myAdapter : MyAdapter = MyAdapter(this, R.layout.list_item, names)
+        var myAdapter : MyAdapter = MyAdapter(this, R.layout.grid_item, names)
 
-        listView?.adapter = myAdapter
+        gridView?.adapter = myAdapter
 
     }
 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

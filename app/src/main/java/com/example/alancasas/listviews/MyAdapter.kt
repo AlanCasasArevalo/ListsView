@@ -17,7 +17,7 @@ class MyAdapter(val context: Context, val layout: Int, val names: List<String>) 
         if (convertView == null){
 
             var layoutInflater = LayoutInflater.from(context)
-            customView = layoutInflater.inflate(R.layout.list_item, null)
+            customView = layoutInflater.inflate(this.layout, null)
             viewHolder = ViewHolder()
             viewHolder.nameTextView = customView.findViewById(R.id.custom_text)
             customView.tag = viewHolder
