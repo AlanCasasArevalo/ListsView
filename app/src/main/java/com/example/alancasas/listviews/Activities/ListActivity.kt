@@ -3,10 +3,10 @@ package com.example.alancasas.listviews.Activities
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import com.example.alancasas.listviews.MyAdapter
 import com.example.alancasas.listviews.R
 
 class ListActivity : AppCompatActivity() {
@@ -41,9 +41,14 @@ class ListActivity : AppCompatActivity() {
             Toast.makeText(this, "Clicked " + names.get(position), Toast.LENGTH_LONG).show()
         }
 
+        var myAdapter : MyAdapter = MyAdapter(this, R.layout.list_item, names)
+
+        listView?.adapter = myAdapter
+
     }
 
 }
+
 
 
 
