@@ -2,8 +2,11 @@ package com.example.alancasas.listviews.Activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.Toast
 import com.example.alancasas.listviews.MyAdapter
@@ -44,6 +47,8 @@ class GridActivity : AppCompatActivity() {
 
         gridView?.adapter = myAdapter
 
+        registerForContextMenu(gridView)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,6 +70,33 @@ class GridActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        var inflater = menuInflater
+
+        var adapterInfo: AdapterView.AdapterContextMenuInfo = menuInfo as AdapterView.AdapterContextMenuInfo
+
+        menu?.setHeaderTitle(this.names?.get(adapterInfo.position))
+
+        inflater.inflate(R.menu.context_menu, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+
+        var adapterInfo: AdapterView.AdapterContextMenuInfo = item?.menuInfo as AdapterView.AdapterContextMenuInfo
+
+        when(item?.itemId){
+            R.id.delete_item -> {
+                this.names?.removeAt(adapterInfo.position)
+                this.myAdapter?.notifyDataSetChanged()
+                return true
+            }
+        }
+
+        return super.onContextItemSelected(item)
+
     }
 
 }
